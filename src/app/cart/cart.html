@@ -1,0 +1,42 @@
+<div class="container cartContainer">
+  <div class="noItems" ng-if="cart.items.length == 0 && !cart.thanks">
+    You have no items in the cart yet!
+  </div>
+  <div class="thanks" ng-if="cart.thanks">
+    Thank you for your order! You will receive it asap.
+  </div>
+  <div class="phone" ng-if="!cart.order" ng-repeat="phone in cart.items">
+    <div class="image">
+      <img ng-src="{{phone.image}}" alt="">
+    </div>
+    <div class="info">
+      <div class="name">{{phone.name}}</div>
+      <div class="details" ng-repeat="detail in phone.details">- {{detail}}</div>
+      <div class="amount">There are only {{phone.amount}} models left!</div>
+      <div class="price">Price: {{phone.price | currency}} <span class="shipping">(+ shipping {{phone.shipping | currency}})</span>
+      </div>
+      <div class="addToCart">
+        <button class="removeCart" ng-click="cart.removeFromCart(phone.id, $index)">Remove</button>
+      </div>
+    </div>
+  </div>
+  <div class="makeTheOrder" ng-if="!cart.order && cart.items.length != 0">
+    <button class="orderBtn" ng-click="cart.order = true;">Make the order</button>
+  </div>
+  <div class="formForOrder" ng-if="cart.order">
+    <h3>To receive your items please fill this form:</h3>
+    <form action="" name="orderForm">
+      <label for="name">Name: </label>
+      <input type="text" name="name" ng-model="cart.user.name" class="formItem" id="name" required="true">
+      <div class="error" ng-if="orderForm.name.$dirty && orderForm.name.$invalid">This field is required!</div>
+      <label for="phone">Phone: </label>
+      <input type="tel" name="phone" ng-model="cart.user.phone" class="formItem" id="phone" required="true" ui-mask="+99(999)999-99-99">
+      <div class="error" ng-if="orderForm.phone.$dirty && orderForm.phone.$invalid">This field is required!</div>
+      <label for="address">Address: </label>
+      <input type="text" name="address" ng-model="cart.user.address" class="formItem" id="address" required="true">
+      <div class="error" ng-if="orderForm.address.$dirty && orderForm.address.$invalid">This field is required!</div>
+    </form>
+    <button ng-disabled="orderForm.$invalid" class="orderBtn" ng-click="cart.submitOrder()">Submit</button>
+  </div>
+
+</div>

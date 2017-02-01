@@ -1,0 +1,22 @@
+<div class="container">
+  <div class="navigation">
+    <input type="text" class="searchInput" ng-model="main.searchParam" placeholder="Search by name: ">
+  </div>
+  <div class="phoneContainer">
+    <div class="phone" ng-repeat="phone in main.items | filter: {name: main.searchParam}">
+      <div class="image">
+        <img ng-src="{{phone.image}}" alt="">
+      </div>
+      <div class="info">
+        <div class="name">{{phone.name}}</div>
+        <div class="details" ng-repeat="detail in phone.details">- {{detail}}</div>
+        <div class="amount">There are only {{phone.amount}} models left!</div>
+        <div class="price">Price: {{phone.price | currency}} <span class="shipping">(+ shipping {{phone.shipping | currency}})</span></div>
+        <div class="addToCart">
+          <button class="cartBtn" ng-click="main.addToCart(phone.id)" ng-if="!main.isInCart(phone.id)">Add to cart</button>
+          <button class="removeCart" ng-click="main.removeFromCart(phone.id)" ng-if="main.isInCart(phone.id)">Remove</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
