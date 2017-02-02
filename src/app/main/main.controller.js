@@ -122,11 +122,14 @@ export class MainController {
   }
 
   addToCart(id) {
+    var userCart = this.db.getItem('cart');
+    if (userCart && userCart.indexOf(id) != -1) {
+      return;
+    }
     if (!this.$scope.$root.myCart) {
       this.$scope.$root.myCart = [];
     }
     this.$scope.$root.myCart.push(id);
-    var userCart = this.db.getItem('cart');
     if (!userCart) {
       this.db.setItem('cart', [id]);
     } else {

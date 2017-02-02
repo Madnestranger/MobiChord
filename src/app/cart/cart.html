@@ -5,7 +5,7 @@
   <div class="thanks" ng-if="cart.thanks">
     Thank you for your order! You will receive it asap.
   </div>
-  <div class="phone" ng-if="!cart.order" ng-repeat="phone in cart.items">
+  <div class="phone" ng-if="!cart.order" ng-repeat="phone in cart.items track by $index">
     <div class="image">
       <img ng-src="{{phone.image}}" alt="">
     </div>
@@ -20,7 +20,7 @@
       </div>
     </div>
   </div>
-  <div class="summary" ng-if="!cart.order">
+  <div class="summary" ng-if="!cart.order && !cart.thanks && cart.items.length != 0">
     Total: {{cart.summary | currency}}
   </div>
   <div class="makeTheOrder" ng-if="!cart.order && cart.items.length != 0">
