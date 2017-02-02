@@ -1,9 +1,29 @@
-<div class="container">
+<div class="container mainContainer">
+  <div class="left-toolbar" ng-class="{opened: main.opened}">
+    <div class="toolbarContainer">
+      <div class="openBtn" ng-click="main.opened = !main.opened;">
+        <span ng-if="!main.opened">open</span>
+        <span ng-if="main.opened">close</span>
+      </div>
+      <div class="categories">
+        <div class="header">
+          <span>Categories:</span>
+        </div>
+        <div class="body">
+          <div class="item" ng-click="main.sortPhones('iPhone')" ng-class="{active: main.filterValue == 'iPhone'}">iPhone</div>
+          <div class="item" ng-click="main.sortPhones('Samsung')" ng-class="{active: main.filterValue == 'Samsung'}">Samsung</div>
+          <div class="item" ng-click="main.sortPhones('Sony')" ng-class="{active: main.filterValue == 'Sony'}">Sony</div>
+          <div class="item" ng-click="main.resetFilter()">Reset filters</div>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="navigation">
     <input type="text" class="searchInput" ng-model="main.searchParam" placeholder="Search by name: ">
+    <div class="chosenFilter" ng-if="main.filterValue != ''">Filter by <span>{{main.filterValue}}</span></div>
   </div>
   <div class="phoneContainer">
-    <div class="phone" ng-repeat="phone in main.items | filter: {name: main.searchParam}">
+    <div class="phone" ng-repeat="phone in main.visibleItems | filter: {name: main.searchParam}">
       <div class="image">
         <img ng-src="{{phone.image}}" alt="">
       </div>

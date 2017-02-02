@@ -9,6 +9,15 @@ export class CartController {
     angular.forEach(this.cartIds, id => {
       this.items.push(this.cartItems.find(x => x.id == id));
     });
+    this.calculateSum();
+  }
+
+  calculateSum() {
+    this.summary = 0;
+    angular.forEach(this.items, item => {
+      this.summary += item.price;
+      this.summary += item.shipping;
+    });
   }
 
   submitOrder() {
@@ -23,5 +32,6 @@ export class CartController {
     this.items.splice(index, 1);
     this.$scope.$root.userCart.splice(this.$scope.$root.userCart.indexOf(id), 1);
     this.db.setItem('cart', this.$scope.$root.userCart);
+    this.calculateSum();
   }
 }

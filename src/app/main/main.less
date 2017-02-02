@@ -1,9 +1,68 @@
 .navigation {
   padding-bottom: 20px;
+  display: flex;
+  align-items: center;
   .searchInput {
     border: 1px solid #5AADBB;
     border-radius: 4px;
     padding: 5px;
+  }
+  .chosenFilter {
+    margin-left: 50px;
+    font-size: 16px;
+    span {
+      color: #5AADBB;
+    }
+  }
+}
+
+.mainContainer {
+  position: relative;
+  .left-toolbar {
+    position: fixed;
+    left: -15vw;
+    height: calc(~"100vh - 50px");
+    background-color: #6c6a6a;
+    color: #fff;
+    width: 15vw;
+    z-index: 10;
+    top: 50px;
+    transition: all 0.3s ease;
+    &.opened {
+      left: 0;
+    }
+    .toolbarContainer {
+      position: relative;
+      .openBtn {
+        outline: none;
+        position: absolute;
+        right: -30px;
+        transform: rotate(270deg);
+        padding: 5px;
+        top: 7px;
+        border-radius: 4px;
+        background-color: #6c6a6a;
+        cursor: pointer;
+      }
+      .categories {
+        .header {
+          padding: 20px;
+        }
+        .body {
+          .item {
+            outline: none;
+            background-color: #6c6a6a;
+            transition: all 0.3s ease;
+            padding: 15px;
+            cursor: pointer;
+            &:hover, &.active {
+              background-color: #fff;
+              color: #6c6a6a;
+            }
+          }
+        }
+      }
+    }
   }
 }
 
@@ -60,5 +119,12 @@
         color: rgba(0,0,0,.6);
       }
     }
+  }
+}
+
+@media (max-width: 500px) {
+  .mainContainer .left-toolbar {
+    width: 50vw;
+    left: -50vw;
   }
 }

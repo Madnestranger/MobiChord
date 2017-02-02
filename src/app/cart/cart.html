@@ -20,6 +20,9 @@
       </div>
     </div>
   </div>
+  <div class="summary" ng-if="!cart.order">
+    Total: {{cart.summary | currency}}
+  </div>
   <div class="makeTheOrder" ng-if="!cart.order && cart.items.length != 0">
     <button class="orderBtn" ng-click="cart.order = true;">Make the order</button>
   </div>
